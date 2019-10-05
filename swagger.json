@@ -1,0 +1,128 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Yet Another Node.js Blogg Application API",
+    "description": "Yet Another Node.js Blogg Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/auth/login": {
+        "post": {
+            "tags": [
+                "Auth"
+            ],
+            "description": "Login User",
+            "parameters": [
+                {
+                "name": "Auth",
+                "in": "body",
+                "description": "User Login",
+                "schema": {
+                        "$ref": "#/definitions/Auth"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                "description": "Login is succesfully",
+                "schema": {
+                        "$ref": "#/definitions/Auth"
+                    }
+                }
+            }
+        }
+    },
+    "/auth/register": {
+        "post": {
+            "tags": [
+                "Auth"
+            ],
+            "description": "Register User",
+            "parameters": [
+                {
+                "name": "Auth",
+                "in": "body",
+                "description": "Register User",
+                "schema": {
+                        "$ref": "#/definitions/AuthRegister"
+                    }
+                }
+            ],
+            "produces": [
+                "application/json"
+            ],
+            "responses": {
+                "200": {
+                "description": "Register is succesfully",
+                "schema": {
+                        "$ref": "#/definitions/AuthRegister"
+                    }
+                }
+            }
+        }
+    }
+  },
+  "definitions": {
+    "Auth": {
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string",
+          "uniqueItems": true
+        }
+      }
+    },
+    "AuthRegister": {
+        "required": [
+          "username",
+          "password",
+          "email"
+        ],
+        "properties": {
+          "username": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "password": {
+            "type": "string",
+            "uniqueItems": false
+          },
+          "email": {
+            "type": "string",
+            "uniqueItems": true
+          }
+        }
+      }
+  }
+}
