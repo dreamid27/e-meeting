@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const userModel = require('../model/userModel')
-mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/emeeting_db', {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'))
 .then(obj => console.log('We\'re Connection'))
