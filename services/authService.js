@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 const userModel = require('../model/userModel')
+const bcrypt = require('bcryptjs')
+const JWTService = require('./JWTService')
+
 mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'))
@@ -7,21 +10,41 @@ db.on('error', console.error.bind(console, 'connection error:'))
 .catch(obj => console.log('tetew'))
 
 const createUser = async (_username, _password, _email) => {
-    let objUser = new userModel({username: _username, password: _password, email: _email});
+    let hashPassword = await generateEncryptPassword(_password)
+    let objUser = new userModel({username: _username, password: hashPassword, email: _email});
     let resUser = await objUser.save()
-    if (resUser)
-        return `User ${_username} berhasil di buat`
-    
-    return `User ${_username} gagal di buat`; //User Create
+    return resUser
 }
 
 const loginUser = async (_username, _password) => {
-    let objUser =  await userModel.findOne({ username: _username, password: _password });
-    if (objUser) {
-        //Success
-        return 'Berhasil Login'
+    let objUser =  await userModel.findOne({ username: _username}); 
+    if (objUser && await checkIsPasswordMatch(_password, objUser.password)) {
+        let userJWT = await JWTService.encodeJsonWebToken(objUser)
+        return userJWT
     } 
-    return 'Username atau Password salah'
+    return false
 }
 
-module.exports = { loginUser, createUser};
+const getUser = async(_token) => {
+    return await JWTService.decodeJsonWebToken(_token)
+}
+
+const generateEncryptPassword = async (_plainTextPassword) => {
+    try {
+        return await bcrypt.hash(_plainTextPassword, 10)
+    } catch (error) {
+        return error;
+    }
+}
+
+const checkIsPasswordMatch = async (_plainTextPassword, _encryptPasswordHash) => {
+    try {
+        return await bcrypt.compare(_plainTextPassword, _encryptPasswordHash)
+    } catch (error) {
+        return error;
+    }
+}
+
+
+ 
+module.exports = { loginUser, createUser, getUser};

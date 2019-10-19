@@ -1,11 +1,10 @@
 const router = require('express').Router()
 const authController =  require('./controller/authController')
+const isLogginMiddleware = require('./middleware/isLogginMiddleware')
 
-router.get('/', function(req, res) {
+router.get('/', isLogginMiddleware, function(req, res) {
     res.send('im the home page!') 
 });
+
 router.use('/auth', authController)
-
-// app.use('/auth', authRoutes)
-
 module.exports = router;
