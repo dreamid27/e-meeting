@@ -1,14 +1,13 @@
 const router = require('express').Router()
 const authController =  require('./controller/authController')
 const roomController = require('./controller/roomController')
+const isLogginMiddleware = require('./middleware/isLogginMiddleware')
 
-router.get('/', function(req, res) {
+router.get('/', isLogginMiddleware, function(req, res) {
     res.send('im the home page!') 
 });
-router.use('/auth', authController)
 
 router.use('/room', roomController)
 
-// app.use('/auth', authRoutes)
-
+router.use('/auth', authController)
 module.exports = router;
