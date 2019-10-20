@@ -1,5 +1,5 @@
 # e-meeting
-e-meeting for book of meeting room
+e-meeting for book of meeting roomModel
 
 #Step for running, make sure your node version 8 >= 
 ##1. run `npm install` for install some dependencies

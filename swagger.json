@@ -84,6 +84,112 @@
                 }
             }
         }
+    },
+    "/room/create": {
+      "post": {
+        "tags": [
+          "Room"
+        ],
+        "description": "Create Room",
+        "parameters": [
+          {
+            "name": "name room",
+            "in": "body",
+            "description": "Create Room",
+            "schema": {
+              "$ref": "#/definitions/createRoom"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Create Room is succesfully",
+            "schema": {
+              "$ref": "#/definitions/createRoom"
+            }
+          }
+        }
+      }
+    },
+    "/room/find": {
+      "post": {
+        "tags": [
+          "Room"
+        ],
+        "description": "Find Room By Name",
+        "parameters": [
+          {
+            "name": "name room",
+            "in": "body",
+            "description": "name Room",
+            "schema": {
+              "$ref": "#/definitions/findRoomByName"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Find Room By Name is succesfully",
+            "schema": {
+              "$ref": "#/definitions/findRoomByName"
+            }
+          }
+        }
+      }
+    },
+    "/room/findall": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "description": "Find All Room",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Find All Room is succesfully",
+            "schema": {
+              "$ref": "#/definitions/findAll"
+            }
+          }
+        }
+      }
+    },
+    "/room/delete": {
+      "delete": {
+        "tags": [
+          "Room"
+        ],
+        "description": "Delete Room By Name",
+        "parameters": [
+          {
+            "name": "name room",
+            "in": "body",
+            "description": "name Room",
+            "schema": {
+              "$ref": "#/definitions/deleteRoomByName"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Room By Name is succesfully",
+            "schema": {
+              "$ref": "#/definitions/deleteRoomByName"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -123,6 +229,65 @@
             "uniqueItems": true
           }
         }
+      },
+    "createRoom": {
+      "required": [
+        "name_room",
+        "description",
+        "capacity",
+        "image_room",
+        "active"
+      ],
+      "properties": {
+        "name_room": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "description": {
+          "type": "string",
+          "uniqueItems": false
+        },
+        "capacity": {
+          "type": "number",
+          "uniqueItems": true
+        },
+        "image_room": {
+          "type": "string",
+          "uniqueItems": false
+        },
+        "active": {
+          "type": "boolean",
+          "uniqueItems": false
+        }
       }
+    },
+    "findRoomByName": {
+      "required": [
+        "name_room"
+      ],
+      "properties": {
+        "name_room": {
+          "type": "string",
+          "uniqueItems": true
+        }
+      }
+    },
+    "findAll": {
+      "required": [
+      ],
+      "properties": {
+      }
+    },
+    "deleteRoomByName": {
+      "required": [
+        "name_room"
+      ],
+      "properties": {
+        "name_room": {
+          "type": "string",
+          "uniqueItems": true
+        }
+      }
+    }
   }
 }
