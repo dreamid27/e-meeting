@@ -3,7 +3,7 @@ const userModel = require('../model/userModel')
 const bcrypt = require('bcryptjs')
 const JWTService = require('./JWTService')
 
-mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});
+mongoose.connect(`mongodb://localhost/${process.env.DB_NAME}`, {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'))
 .then(obj => console.log('We\'re Connection'))
@@ -16,8 +16,11 @@ const createUser = async (_username, _password, _email) => {
     return resUser
 }
 
-const loginUser = async (_username, _password) => {
-    let objUser =  await userModel.findOne({ username: _username}); 
+const loginUser = async (_userID, _password) => {
+    let objUser =  await userModel.findOne({$or: [
+        {username: _userID},
+        {email: _userID}
+    ]}); 
     if (objUser && await checkIsPasswordMatch(_password, objUser.password)) {
         let userJWT = await JWTService.encodeJsonWebToken(objUser)
         return userJWT
@@ -45,6 +48,4 @@ const checkIsPasswordMatch = async (_plainTextPassword, _encryptPasswordHash) =>
     }
 }
 
-
- 
 module.exports = { loginUser, createUser, getUser};

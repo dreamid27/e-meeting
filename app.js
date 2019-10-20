@@ -1,6 +1,8 @@
+
+require('dotenv').config()
 const express = require('express'), 
 app = express(),
-port = 3333,
+port = process.env.PORT || 3333,
 appRouter = require('./router'),
 swaggerUi = require('swagger-ui-express'),
 swaggerDocument = require('./swagger.json');

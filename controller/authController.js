@@ -4,8 +4,8 @@ const authService = require('../services/authService')
 
 // Home page route.
 router.post('/login', function (req, res) {
-  const { username, password } = req.body
-  authService.loginUser(username, password).then(obj => {
+  const { userID, password } = req.body
+  authService.loginUser(userID, password).then(obj => {
     if (obj) {
       res.send({'token': obj})
     } else {
@@ -31,7 +31,7 @@ router.post('/register', function (req, res) {
 router.get('/user', function (req, res) {
   authService.getUser(req.headers.authorization).then(obj => {
     if (obj) {
-      res.send({data: obj})
+      res.send(obj)
     } else {
       res.status(400);
       res.send('Not Authonticated')
