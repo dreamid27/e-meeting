@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const roomModel = require('../model/roomModel')
-mongoose.connect('mongodb://localhost/emeeting_db', {useNewUrlParser: true});
+mongoose.connect(process.env.DB_API, {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind('Connection error:'))
 .then(obj => console.log('Connected'))

@@ -3,7 +3,7 @@ const userModel = require('../model/userModel')
 const bcrypt = require('bcryptjs')
 const JWTService = require('./JWTService')
 
-mongoose.connect(`mongodb://localhost/${process.env.DB_NAME}`, {useNewUrlParser: true});
+mongoose.connect(process.env.DB_API, {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'))
 .then(obj => console.log('We\'re Connection'))

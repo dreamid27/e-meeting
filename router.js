@@ -8,6 +8,5 @@ router.get('/', isLogginMiddleware, function(req, res) {
 });
 
 router.use('/room', roomController)
-
 router.use('/auth', authController)
 module.exports = router;
