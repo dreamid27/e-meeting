@@ -3,11 +3,12 @@ const userModel = require('../model/userModel')
 const bcrypt = require('bcryptjs')
 const JWTService = require('./JWTService')
 
+console.log(process.env.DB_API)
 mongoose.connect(process.env.DB_API, {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'))
 .then(obj => console.log('We\'re Connection'))
-.catch(obj => console.log('tetew'))
+.catch(obj => console.error(obj , 'Error when try to connect'))
 
 const createUser = async (_username, _password, _email) => {
     let hashPassword = await generateEncryptPassword(_password)
