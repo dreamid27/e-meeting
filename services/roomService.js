@@ -1,10 +1,12 @@
-const mongoose = require('mongoose')
-const roomModel = require('../model/roomModel')
+roomModel = require('../model/roomModel');
+
+const mongoose = require('mongoose');
 mongoose.connect(process.env.DB_API, {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind('Connection error:'))
 .then(obj => console.log('Connected'))
-.catch(obj => console.log('not connected'))
+.catch(obj => console.log('not connected'));
+
 
 const createRoom = async (_nameRoom, _description, _capacity, _imageRoom, _active) => {
     let objRoom = new roomModel({

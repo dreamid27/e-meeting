@@ -20,10 +20,10 @@ router.post('/register', function (req, res) {
   const { username, password, email } = req.body
   authService.createUser(username, password, email).then(obj => {
     if (obj) {
-      res.send('Berhasil Login')
+      res.send('Berhasil Register')
     } else {
       res.status(400);
-      res.send('Username atau Password salah')
+      res.send('Gagal Register')
     }
   })
 })

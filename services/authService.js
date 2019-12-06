@@ -1,14 +1,10 @@
-const mongoose = require('mongoose')
-const userModel = require('../model/userModel')
-const bcrypt = require('bcryptjs')
-const JWTService = require('./JWTService')
+const mongoose = require('mongoose'), userModel = require('../model/userModel'),bcrypt = require('bcryptjs'),JWTService = require('./JWTService');
 
-console.log(process.env.DB_API)
 mongoose.connect(process.env.DB_API, {useNewUrlParser: true});
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'))
-.then(obj => console.log('We\'re Connection'))
-.catch(obj => console.error(obj , 'Error when try to connect'))
+db.on('error', console.error.bind('Connection error:'))
+.then(obj => console.log('Connected'))
+.catch(obj => console.log('not connected'));
 
 const createUser = async (_username, _password, _email) => {
     let hashPassword = await generateEncryptPassword(_password)
@@ -23,6 +19,7 @@ const loginUser = async (_userID, _password) => {
         {email: _userID}
     ]}); 
     if (objUser && await checkIsPasswordMatch(_password, objUser.password)) {
+        console.log(objUser);
         let userJWT = await JWTService.encodeJsonWebToken(objUser)
         return userJWT
     } 

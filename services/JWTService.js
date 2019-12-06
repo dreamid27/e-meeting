@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const encodeJsonWebToken = async (_userModel) => {
-    const {username, email } = _userModel
-    return jwt.sign(Object.assign({username, email}),  'shhhhh');
+    const {username, email, _id } = _userModel
+    return jwt.sign(Object.assign({username, email, _id}),  'shhhhh');
 }
 
 const decodeJsonWebToken = async (_token) => {
