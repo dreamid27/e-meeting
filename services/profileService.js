@@ -17,7 +17,6 @@ const updateProfile = async (_profileData) => {
     //     if (typeof _profileData[el] != 'undefined') tempObj[el] = _profileData[el];
     // });
 
-    console.log(tempObj, 'tempObj')
 
     let resProfile = profileModel.findOneAndUpdate(
         {user_id: new ObjectId(_profileData['user_id'])}, 
