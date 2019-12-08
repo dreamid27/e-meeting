@@ -12,9 +12,8 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "*");
-    res.header("Access-Control-Allow-Methods", "*");
-    next();
-    
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    next();    
 });
 
 app.use('/', appRouter)
