@@ -99,7 +99,7 @@ router.post('/cancel', async function(req, res) {
 router.get('/request/me', async function(req, res) {
     let tempUser = await authService.getUser(req.headers.authorization);
     const isAccepted = req.query['isAccepted'];
-    const filter = isAccepted ? 
+    const filter = isAccepted && isAccepted === 'true' ? 
     {'user_id': tempUser['_id']} : 
     {'partner_id': tempUser['_id'], 'status': 0}
     console.log(filter, 'filter')
