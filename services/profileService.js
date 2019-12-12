@@ -10,14 +10,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 
 const updateProfile = async (_profileData) => {
-    // let nameObject = ['full_name', 'religion', 'manhaj', 'date_birth', 'gender', 'user_id', 'in_relation', 'detail_relation', 'ds'];
     let tempObj = _profileData;
-
-    // nameObject.forEach(el => {
-    //     if (typeof _profileData[el] != 'undefined') tempObj[el] = _profileData[el];
-    // });
-
-
     let resProfile = profileModel.findOneAndUpdate(
         {user_id: new ObjectId(_profileData['user_id'])}, 
         tempObj, 
