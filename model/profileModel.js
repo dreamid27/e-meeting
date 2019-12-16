@@ -1,14 +1,20 @@
 let mongoose = require('mongoose');
 
 let profileSchema = new mongoose.Schema({
-  full_name: String,
   first_name: String,
   last_name: String,
   company: String,
-  religion: String,
   manhaj: String,
-  date_birth: String,
+  born_date: String,
   gender: String,
+  id_card: String,
+  status_marriage: Number,
+  born_city: String,
+  anak_ke: Number,
+  domisili_city: String,
+  from_city: String,
+  suku: String,
+  marriage_permission: Number,
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
