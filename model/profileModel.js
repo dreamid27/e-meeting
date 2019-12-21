@@ -1,7 +1,38 @@
 let mongoose = require('mongoose');
 
-let physicalImageSchema = new mongoose.Schema(
-  { gender: String,manhaj: String,skin_color: String,eye_color: String });
+let physicalImageSchema = new mongoose.Schema({ 
+  bentuk_fisik: String,
+  skin_color: String,
+  eye_color: String,
+  hair_color: String,
+  hair_type: String,
+  height: Number,
+  weight: Number,
+  favorite_sport: String,
+  history_medical: String,
+  ciri_khas: String,
+  cacat_fisik: String
+});
+
+let selfImageSchema = new mongoose.Schema({ 
+  moto: String,
+  life_target: String,
+  appreciation: String,
+  hobby: String,
+  activities_in_freetime: String,
+  things_like: Number,
+  positive_nature: Number,
+  negative_nature: String,
+  opinion_poligami: String
+});
+
+let familySchema = new mongoose.Schema({ 
+  relation: String,
+  job: String,
+  age: Number,
+  religion: String,
+  education: String,
+});
 
 
 let profileSchema = new mongoose.Schema({
@@ -38,7 +69,9 @@ let profileSchema = new mongoose.Schema({
       ref: 'User',
     },
   },
-  physical_Image: physicalImageSchema
+  physical_image: physicalImageSchema,
+  self_image: selfImageSchema,
+  families: [familySchema]
 });
 
 let profileModel = mongoose.model('Profile', profileSchema);
