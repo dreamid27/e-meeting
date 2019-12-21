@@ -1,5 +1,9 @@
 let mongoose = require('mongoose');
 
+let physicalImageSchema = new Schema(
+  { gender: String,manhaj: String,skin_color: String,eye_color: String });
+
+
 let profileSchema = new mongoose.Schema({
   first_name: String,
   last_name: String,
@@ -33,7 +37,8 @@ let profileSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
-  }
+  },
+  physical_Image: physicalImageSchema
 });
 
 let profileModel = mongoose.model('Profile', profileSchema);
