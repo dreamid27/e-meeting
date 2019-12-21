@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 
-let physicalImageSchema = new Schema(
+let physicalImageSchema = new mongoose.Schema(
   { gender: String,manhaj: String,skin_color: String,eye_color: String });
 
 
