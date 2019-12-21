@@ -34,6 +34,26 @@ let familySchema = new mongoose.Schema({
   education: String,
 });
 
+let educationSchema = new mongoose.Schema({ 
+  education_level: String,
+  spesialis: String,
+  start_year: Number,
+  end_year: Number
+});
+
+let experienceSchema = new mongoose.Schema({ 
+  experience_type: String,
+  position: String,
+  company: String,
+  start_year: Number,
+  end_year: Number
+});
+
+let praySchema = new mongoose.Schema({ 
+  pray_type: String,
+  description: String,
+});
+
 
 let profileSchema = new mongoose.Schema({
   first_name: String,
@@ -71,7 +91,10 @@ let profileSchema = new mongoose.Schema({
   },
   physical_image: physicalImageSchema,
   self_image: selfImageSchema,
-  families: [familySchema]
+  families: [familySchema],
+  educations: [educationSchema],
+  experiences: [experienceSchema],
+  prays: [praySchema]
 });
 
 let profileModel = mongoose.model('Profile', profileSchema);
