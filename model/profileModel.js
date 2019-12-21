@@ -20,8 +20,8 @@ let selfImageSchema = new mongoose.Schema({
   appreciation: String,
   hobby: String,
   activities_in_freetime: String,
-  things_like: Number,
-  positive_nature: Number,
+  things_like: String,
+  positive_nature: String,
   negative_nature: String,
   opinion_poligami: String
 });
