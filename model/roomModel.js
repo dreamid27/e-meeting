@@ -9,5 +9,4 @@ let roomSchema = new mongoose.Schema({
 });
 
 let roomModel = mongoose.model('Room', roomSchema);
-
 module.exports = roomModel;
